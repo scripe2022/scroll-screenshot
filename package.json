@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "nuxt3": "latest"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "blueimp-md5": "^2.19.0",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2"
+  }
+}

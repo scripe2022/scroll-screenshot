@@ -1,0 +1,3 @@
+<template>
+    <Documentation></Documentation>
+</template>
