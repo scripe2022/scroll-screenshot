@@ -20,7 +20,6 @@ const base64ToPixels = (base64) => {
             let context = canvas.getContext('2d');
             context.drawImage(image, 0, 0);
             let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-            console.log(imageData);
             resolve({
                 height: image.height,
                 width: image.width,

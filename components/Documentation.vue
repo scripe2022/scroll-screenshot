@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <input type="file" ref="file" accept="image/*" multiple @change="getFile($event)" />
+    <div class="documentation-container">
+        <div>
+            <input type="file" ref="file" accept="image/*" multiple @change="getFile($event)" />
+        </div>
         <!-- <img :src="imgSrc" /> -->
         <!-- <img :src="picsBase64[1]" /> -->
-        <FlexImage v-if="fuck" :image="imageArray[0]"></FlexImage>
+        <ResultImage v-if="fuck" :imageArray="imageArray"></ResultImage>
     </div>
 </template>
 
@@ -24,6 +26,7 @@
     for (let i = 0; i < imageArray.length; ++i) {
         await imageArray[i].base64ToPixels();
     }
+    fuck.value = true;
 
     const getFile = async (event) => {
         const files = event.target.files;
@@ -69,9 +72,6 @@
         result.setPixels(resultPixels, resultHeight, resultWidth);
         await result.pixelsToBase64();
         imgSrc.value = result.base64;
-        console.log(resultHeight);
-        console.log(resultWidth);
-        console.log(resultPixels);
 
         // const temp = new PixelImage();
         // let newPixels = new Uint8ClampedArray(imageArray[0].pixel.length + imageArray[1].pixel.length);
@@ -86,3 +86,9 @@
         fuck.value = true;
     };
 </script>
+
+<style scoped>
+    .documentation-container {
+        margin: 50px;
+    }
+</style>
