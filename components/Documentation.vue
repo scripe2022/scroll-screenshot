@@ -1,8 +1,9 @@
 <template>
     <div>
         <input type="file" ref="file" accept="image/*" multiple @change="getFile($event)" />
-        <img :src="imgSrc" />
+        <!-- <img :src="imgSrc" /> -->
         <!-- <img :src="picsBase64[1]" /> -->
+        <FlexImage v-if="fuck" :image="imageArray[0]"></FlexImage>
     </div>
 </template>
 
@@ -13,13 +14,16 @@
     import { PixelImage } from '~/utils/PixelImage';
 
     let imgSrc = ref('');
+    let fuck = ref(false);
 
     let imageArray = [];
-    // imageArray.push(new PixelImage(tempBase64['pic1']));
-    // imageArray.push(new PixelImage(tempBase64['pic2']));
-    // for (let i = 0; i < imageArray.length; ++i) {
-    //     await imageArray[i].base64ToPixels();
-    // }
+    imageArray.push(new PixelImage());
+    imageArray.push(new PixelImage());
+    imageArray[0].setBase64(tempBase64['pic1']);
+    imageArray[1].setBase64(tempBase64['pic2']);
+    for (let i = 0; i < imageArray.length; ++i) {
+        await imageArray[i].base64ToPixels();
+    }
 
     const getFile = async (event) => {
         const files = event.target.files;
@@ -67,7 +71,7 @@
         imgSrc.value = result.base64;
         console.log(resultHeight);
         console.log(resultWidth);
-        console.log(newPixels);
+        console.log(resultPixels);
 
         // const temp = new PixelImage();
         // let newPixels = new Uint8ClampedArray(imageArray[0].pixel.length + imageArray[1].pixel.length);
@@ -79,5 +83,6 @@
         // temp.setPixels(newPixels, newHeight, newWidth);
         // await temp.pixelsToBase64();
         // imgSrc.value = temp.base64;
+        fuck.value = true;
     };
 </script>
